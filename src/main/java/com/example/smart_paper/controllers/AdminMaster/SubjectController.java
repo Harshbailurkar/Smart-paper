@@ -18,7 +18,7 @@ public class SubjectController {
     private SubjectService subjectService;
 
     // Create a new Subject
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Subject> createSubject(@RequestBody Subject subject) {
         String loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
         subject.setUsername(loggedInUsername);
@@ -27,7 +27,7 @@ public class SubjectController {
     }
 
     // Get all Subjects
-    @GetMapping
+    @PostMapping
     public ResponseEntity<List<Subject>> getAllSubjects() {
         List<Subject> subjects = subjectService.getAllSubjects();
         return ResponseEntity.ok(subjects);

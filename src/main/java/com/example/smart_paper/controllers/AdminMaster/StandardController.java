@@ -18,7 +18,8 @@ public class StandardController {
     private StandardService standardService;
 
     // Create a new Standard
-    @PostMapping
+
+    @PostMapping("/add")
     public ResponseEntity<Standard> createStandard(@RequestBody Standard standard) {
         String loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
         standard.setUsername(loggedInUsername);
@@ -28,7 +29,7 @@ public class StandardController {
     }
 
     // Get all Standards
-    @GetMapping
+    @PostMapping
     public ResponseEntity<List<Standard>> getAllStandards() {
         List<Standard> standards = standardService.getAllStandards();
         return ResponseEntity.ok(standards);

@@ -18,12 +18,10 @@ public class BoardController {
     private BoardService boardService;
 
     // Create a new Board
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Board> createBoard(@RequestBody Board board) {
-        // Get the currently logged-in username
         String loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        // Automatically set the username of the board
         board.setUsername(loggedInUsername);
 
         Board createdBoard = boardService.saveBoard(board);
@@ -31,7 +29,7 @@ public class BoardController {
     }
 
     // Get all Boards
-    @GetMapping
+    @PostMapping
     public List<Board> getAllBoards() {
         return boardService.getAllBoards();
     }
@@ -47,10 +45,8 @@ public class BoardController {
     // Update a Board by ID
     @PutMapping("/{id}")
     public ResponseEntity<Board> updateBoard(@PathVariable Long id, @RequestBody Board updatedBoard) {
-        // Get the currently logged-in username
-        String loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        // Automatically set the username for the update operation
+        String loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
         updatedBoard.setUsername(loggedInUsername);
 
         Board board = boardService.updateBoard(id, updatedBoard);

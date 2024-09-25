@@ -5,6 +5,7 @@ import com.example.smart_paper.repository.AdminMaster.ChapterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,6 +14,9 @@ public class ChapterService {
     @Autowired
     private ChapterRepository chapterRepository;
 
+    public List<Chapter> getAllChapters(){
+        return chapterRepository.findAll();
+    }
     // Save new chapter
     public Chapter save(Chapter chapter, String username) {
         chapter.setUsername(username);

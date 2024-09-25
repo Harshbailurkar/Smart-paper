@@ -1,5 +1,6 @@
 package com.example.smart_paper.controllers.AdminMaster;
 
+import com.example.smart_paper.models.Board;
 import com.example.smart_paper.models.Chapter;
 import com.example.smart_paper.service.AdminMaster.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,12 +19,18 @@ public class ChapterController {
     private ChapterService chapterService;
 
     // Create new chapter
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Chapter> createChapter(@RequestBody Chapter chapter) {
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
         Chapter savedChapter = chapterService.save(chapter, username);
         return ResponseEntity.ok(savedChapter);
     }
+    @PostMapping
+    public List<Chapter> getAllBoards() {
+        return chapterService.getAllChapters();
+    }
+
+
 
     // Update existing chapter
     @PutMapping("/{id}")

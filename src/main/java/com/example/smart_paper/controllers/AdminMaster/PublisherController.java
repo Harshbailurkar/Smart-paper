@@ -30,13 +30,14 @@ public class PublisherController {
     }
 
     // Get all Publishers
-    @GetMapping
+    @PostMapping
     public List<Publisher> getAllPublishers() {
         return publisherService.getAllPublishers();
     }
 
+
     // Get a Publisher by ID
-    @GetMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<Publisher> getPublisherById(@PathVariable Long id) {
         Optional<Publisher> publisher = publisherService.getPublisherById(id);
         return publisher.map(ResponseEntity::ok)
